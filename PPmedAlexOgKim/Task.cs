@@ -5,8 +5,8 @@ public class Task
     //private int Id;
     private string Title;
     private string Description;
-
-    public Task(string title, string description, int id)
+    private bool isActive;
+    public Task(string title, string description)
     {
         Title = title;
         Description = description;

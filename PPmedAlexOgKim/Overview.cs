@@ -8,40 +8,69 @@ public class Overview
 
     public void MainMenu()
     {
-        Console.WriteLine("Welcome");
-
-        string Choise = Console.ReadLine();
-        switch (Choise)
+        while (true)
         {
-            case "1":
-                PrintList(); break;
-            case "2":
-                AddTask(); break;
-            case "3":
-                RemoveTask(); break;
-            default:
-                Environment.Exit(0);
-                break;
+            Console.WriteLine("Welcome");
+            Console.WriteLine("1. Print all Tasks");
+            Console.WriteLine("2. Add Task");
+            Console.WriteLine("3. Remove Task");
+            string Choise = Console.ReadLine();
+            switch (Choise)
+            {
+                case "1":
+                    PrintList(); break;
+                case "2":
+                    inputTask(); break;
+                case "3":
+                    EditTasks(); break;
+                default:
+                    Environment.Exit(0);
+                    break;
+            }
         }
     }
 
     void PrintList()
     {
-        foreach (var task in myTasks)
+        for(int i = 0; i< myTasks.Count; i++)
         {
             Console.WriteLine();
-            Console.WriteLine(task.getTitle());
-            Console.WriteLine(task.getDescription());
+            Console.WriteLine($"{i}. {myTasks[i].getTitle()}");
+            Console.WriteLine(myTasks[i].getDescription());
             Console.WriteLine();
             
         }
     }
 
-    public void AddTask()
+    public void inputTask()
     {
-        string tit = "";
+        Console.Clear();
+        Console.WriteLine("Add Title:");
+        string title = Console.ReadLine();
+        Console.WriteLine("Add Description");
+        string Descrip = Console.ReadLine();
+        AddTask(title, Descrip);
+    }
 
-        var NewTask = new Task();
+    public void AddTask(string title, string desc)
+    {
+        string tit = title ?? "";
+        string des = desc ?? "";
+        var NewTask = new Task(tit,des);
+        myTasks.Add(NewTask);
+    }
 
+    public void EditTasks()
+    {
+        Console.Clear();
+        PrintList();
+        Console.WriteLine("Remove at index:");
+        int index = int.Parse(Console.ReadLine());
+        RemoveTask(index);
+    }
+
+    public void RemoveTask(int index)
+    {
+        myTasks.RemoveAt(index);
     }
 }
