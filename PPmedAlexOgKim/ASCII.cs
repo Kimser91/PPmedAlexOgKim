@@ -9,5 +9,9 @@ internal static class ASCII
 ▐▌   ▝▚▄▞▘        █     ▗▄▖     ▐▙▄▄▀ ▝▚▄▞▘    █   ▐▌  
                        ▐▌ ▐▌                       ▐▌  
                         ▝▀▜▌                           
-                       ▐▙▄▞▘                           ";
+                       ▐▙▄▞▘                           
+
+           Use [UP] / [DOWN] for navigation.
+               [Q] To go back or exit.
+";
 }

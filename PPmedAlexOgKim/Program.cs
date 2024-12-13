@@ -1,4 +1,5 @@
 ﻿using PPmedAlexOgKim;
 
-var prog = new Overview();
-prog.MainMenu();
+Overview prog = new Overview();
+
+UI.Menu(prog);

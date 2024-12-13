@@ -4,7 +4,7 @@ namespace PPmedAlexOgKim;
 
 public class Overview
 {
-    List<Task> myTasks = new List<Task>();
+    public List<Task> myTasks = new List<Task>();
 
     public void MainMenu()
     {
@@ -32,13 +32,13 @@ public class Overview
 
     void PrintList()
     {
-        for(int i = 0; i< myTasks.Count; i++)
+        for (int i = 0; i < myTasks.Count; i++)
         {
             Console.WriteLine();
             Console.WriteLine($"{i}. {myTasks[i].getTitle()}");
             Console.WriteLine(myTasks[i].getDescription());
             Console.WriteLine();
-            
+
         }
     }
 
@@ -56,7 +56,7 @@ public class Overview
     {
         string tit = title ?? "";
         string des = desc ?? "";
-        var NewTask = new Task(tit,des);
+        var NewTask = new Task(tit, des);
         myTasks.Add(NewTask);
     }
 

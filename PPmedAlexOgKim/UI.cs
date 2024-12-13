@@ -1,6 +1,6 @@
 namespace PPmedAlexOgKim;
 
-internal class UI
+public static class UI
 {
     static void ColorMenuItem(string item)
     {
@@ -17,11 +17,13 @@ internal class UI
         int selectedOption = 0;
         while (true)
         {
+            Console.Clear();
             Console.WriteLine(ASCII.title);
+
             for (int option = 0; option < options.Count; option++)
             {
                 if (selectedOption == option) { ColorMenuItem(options[option]); }
-                else { Console.WriteLine(option); }
+                else { Console.WriteLine(options[option]); }
             }
 
             var input = Console.ReadKey(false).Key;
@@ -38,8 +40,6 @@ internal class UI
                 case ConsoleKey.Q:
                     return 404;
             }
-
-            Console.Clear();
         }
     }
 
@@ -54,26 +54,58 @@ internal class UI
         }
     }
 
-    static void MakeTask()
+    static void MakeTask(Overview MyList)
     {
+        Console.Clear();
+        Console.WriteLine(ASCII.title);
         Console.Write("Title for your task:\n~> ");
+        var title = Console.ReadLine() ?? string.Empty;
+        Console.Write("Description for your task:\n~> ");
+        var description = Console.ReadLine() ?? string.Empty;
+        MyList.AddTask(title, description);
     }
 
-    static void ShowTasks()
+    static void ShowTasks(Overview MyList)
     {
         while (true)
         {
-            //
+            Console.Clear();
+            Console.WriteLine(ASCII.title);
+
+            List<string> ScrollableList = new List<string>();
+
+            foreach (var task in MyList.myTasks)
+            {
+                if (task.isActive) { ScrollableList.Add($"[X] {task.Title}: {task.Description}"); }
+                else { ScrollableList.Add($"[ ] {task.Title}: {task.Description}"); }
+            }
+
+            int selectedOption = MenuGenerator(ScrollableList);
+
+            if (selectedOption == 404)
+            {
+                return;
+            }
+            else
+            {
+                for (int i = 0; i < ScrollableList.Count; i++)
+                {
+                    if (i == selectedOption)
+                    {
+                        var curTask = MyList.myTasks[i].isActive;
+                        MyList.myTasks[i].isActive = curTask == true ? false : true;
+                    }
+                }
+            }
         }
     }
 
-    static void Menu()
+    public static void Menu(Overview MyList)
     {
         List<string> options = new List<string>
         {
-            "[1] Show you tasks",
+            "[1] Show your tasks",
             "[2] Create new task",
-            "[Q] Exit"
         };
 
         while (true)
@@ -81,10 +113,10 @@ internal class UI
             switch (MenuGenerator(options))
             {
                 case 0:
-                    ShowTasks();
+                    ShowTasks(MyList);
                     break;
                 case 1:
-                    MakeTask();
+                    MakeTask(MyList);
                     break;
                 case 404:
                     Console.CursorVisible = true;

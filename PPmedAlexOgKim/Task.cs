@@ -3,9 +3,9 @@
 public class Task
 {
     //private int Id;
-    private string Title;
-    private string Description;
-    private bool isActive;
+    public string Title;
+    public string Description;
+    public bool isActive = false;
     public Task(string title, string description)
     {
         Title = title;
@@ -38,9 +38,9 @@ public class Task
         Description = des;
     }
 
-   /* public void setId(int id)
-    {
-        Id = id;
-    }*/
+    /* public void setId(int id)
+     {
+         Id = id;
+     }*/
 
 }
