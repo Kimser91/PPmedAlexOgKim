@@ -30,10 +30,10 @@ public static class UI
             switch (input)
             {
                 case ConsoleKey.UpArrow:
-                    if (selectedOption < options.Count - 1) { selectedOption++; }
+                    if (selectedOption > 0) { selectedOption--; }
                     break;
                 case ConsoleKey.DownArrow:
-                    if (selectedOption > 0) { selectedOption--; }
+                    if (selectedOption < options.Count - 1) { selectedOption++; }
                     break;
                 case ConsoleKey.Enter:
                     return selectedOption;
